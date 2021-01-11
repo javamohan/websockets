@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -19,8 +20,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		LOGGER.info("userDetailsService .. Authentication .. Enter!!");
         User.UserBuilder users = User.withDefaultPasswordEncoder();
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(users.username("root").password("admin123").roles("USER").build());
-        manager.createUser(users.username("admin").password("password").roles("USER", "ADMIN").build());
+        manager.createUser(users.username(Constants.LOCAL_USERNAME).password(Constants.LCOCAL_PASSWORD).roles(Constants.USER).build());
+        manager.createUser(users.username(Constants.ADMIN_USER).password(Constants.ADMIN_PASSWORD).roles(Constants.USER, Constants.ADMIN).build());
+        LOGGER.info("userDetailsService .. Authentication .. End!!");
         return manager;
 
     }
